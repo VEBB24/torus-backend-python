@@ -16,7 +16,8 @@
 #===============================================================================
 
 
-FILES="$*"
+FILES=()
+FILES+=("$@")
 
 if [ -z "$FILES" ]; then
     echo "Expected argument for files to run"
@@ -36,6 +37,8 @@ if [ -z "$PYSPARK_PYTHON" ]; then
     fi
 fi
 
-exec lib/spark/bin/spark-submit "$FILES" || \
-    echo "Error while trying to execute the files"
+export SPARK_LOCAL_IP=127.0.0.1
 
+exec lib/spark/bin/spark-submit "${FILES[@]}"
+
+find src -name "*.pyc" -exec rm {} \;
