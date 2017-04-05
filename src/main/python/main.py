@@ -7,23 +7,21 @@ from parallelize_transformation import *
 from gdal_operations import *
 
 
-def main(fnames):
-    #if len(sys.argv[1:]) == 0:
-    #    err_log("Please provide filenames as input")
-    #    sys.exit(1)
-    #fnames = sys.argv[1:]
-    #TODO check arguments
-    dataset_list = get_multiple_datasets(fnames)
+def main():
+    if len(sys.argv[1:]) == 0:
+        err_log("Please provide filenames as input")
+        sys.exit(1)
+    fnames = sys.argv[1:]
 
-    return_codes = parallelize_transformation(dataset_list, gdal_transformations)
-    return_code = err_check(dataset_list, return_codes)
+    return_codes = parallelize_transformation(fnames, gdal_transformations)
+    return_code = err_check(fnames, return_codes)
     return return_code
 
 def err_check(dataset_list, return_codes):
     for dataset, return_code in zip(dataset_list, return_codes):
         if return_code:
-            err_log("Could not write " + dataset[0] + 
-                " transformations to " + dataset[1])
+            err_log("Could not write "  + dataset + 
+                " transformations")
     return reduce(lambda r1, r2 : r1*r2, return_codes)
 
 def err_log(text):
