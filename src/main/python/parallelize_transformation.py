@@ -3,7 +3,7 @@ from gdal_operations import *
 
 def parallelize_transformation(imageList, transformation):
     with SparkContext('local', appName="MyApp") as sc:
-        return_codes = [0]
+        return_codes = [1] * len(imageList)
         # Add python code into each node
         rdd = sc.parallelize(imageList)
         try:
