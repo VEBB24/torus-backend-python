@@ -1,5 +1,6 @@
 from osgeo import gdal
 from gdalconst import *
+import os
 
 # Writes a translation of an input dataset based on a given format
 def gdal_translate(input_name, output_name):
@@ -20,6 +21,6 @@ def gdal_translate(input_name, output_name):
     return return_code
 
 # Apply different transformations on a dataset
-def gdal_transformations(tuple_name):
-    input_name, output_name = tuple_name[0], tuple_name[1]
+def gdal_transformations(input_name):
+    output_name = os.path.splitext(input_name)[0]+'.tif'
     return gdal_translate(input_name, output_name)
