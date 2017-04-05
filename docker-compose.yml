@@ -1,0 +1,10 @@
+version: '1'
+services:
+  gateway:
+    build: .
+    environment:
+      - HOST_HDFS=${HOST_HDFS}
+
+networks:
+  hadoop:
+    external: true
