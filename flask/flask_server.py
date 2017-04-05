@@ -6,5 +6,5 @@ app = Flask(__name__)
 @app.route('/')
 def call_main():
    args = request.args.get('source').split(",")
-   call(["./launch-docker.sh"] + args)
+   call(["spark-submit","main.py"] + args)
    return "OK"

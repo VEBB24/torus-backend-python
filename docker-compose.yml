@@ -3,10 +3,11 @@ version: '2'
 services:
   gateway:
     build: .
-    ports: 
-      - "8020"
     environment:
       - HOST_HDFS=${HOST_HDFS}
+    network_mode: host
+    ports: 
+      - "5000"
 
 networks:
   default:
