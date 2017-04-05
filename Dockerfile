@@ -14,7 +14,7 @@ RUN mkdir hdfs && \
 RUN easy_install flask
 
 ADD flask /flask
-ADD src/main/python/ /files
+ADD src/ /files
 WORKDIR /files
 COPY ./init.sh /init.sh
 RUN chmod +x /init.sh
