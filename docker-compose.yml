@@ -1,15 +1,19 @@
 version: '2'
 
 services:
-  gateway:
+  gdal:
     build: .
+    image: torusbackendpython_gdal
+    hostname: gdal
+    container_name: gdal
+    domainname: gdal
+    networks:
+      - gdal
     environment:
       - HOST_HDFS=${HOST_HDFS}
-    network_mode: host
     ports: 
       - "5000"
 
 networks:
-  default:
-    external:
-      name: hadoop
+    gdal:
+      external: true
